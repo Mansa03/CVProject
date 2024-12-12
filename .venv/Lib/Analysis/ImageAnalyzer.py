@@ -49,5 +49,23 @@ def main():
     edgeContours = cv.drawContours(image, contours, -1, (0, 255, 0), 3)
     cv.imshow('contours',edgeContours)
     cv.waitKey(0)
+    output_image = edgeContours.copy()
+    for contour in contours:
+        # Draw contour
+        cv.drawContours(output_image, [contour], -1, (0, 255, 0), 2)
+
+        # Draw bounding box
+        x, y, w, h = cv.boundingRect(contour)
+        cv.rectangle(output_image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+        # Draw centroid
+        moments = cv.moments(contour)
+        if moments['m00'] != 0:
+            centroid = (int(moments['m10'] / moments['m00']), int(moments['m01'] / moments['m00']))
+            cv.circle(output_image, centroid, 5, (255, 0, 0), -1)
+
+    # Display the resulting image
+    cv.imshow('Contours and Features', output_image)
+    cv.waitKey(0)
 main()
 
