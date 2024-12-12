@@ -1,0 +1,53 @@
+import os
+import math
+
+import cv2 as cv
+import numpy as np
+from Dataset import Dataset
+from Items.Items import Item, Itemtype
+ImageDirectory = r'../Images'
+
+def DataPipelineAndEnhancement() -> list[Item]:
+    dataset:list[Item] = []
+    for path, folders, files in os.walk(ImageDirectory):
+        for folderName in folders:
+            folderPath = os.path.join(path, folderName)
+            typeOfItem = str(folderName).removeprefix('CV ').upper()
+            for file in os.listdir(folderPath):
+                #Remove shadows from image using thresholding to find shadows and fill in
+                image = cv.imread(os.path.join(folderPath, file))
+                image = cv.resize(image, (640, 480))
+                hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
+                _, _, v = cv.split(hsv)
+                shadow_mask = v<256
+                enhanced = cv.inpaint(image, shadow_mask.astype(np.uint8), 3, cv.INPAINT_TELEA)
+
+                #Adding a Gaussian High-Pass Filter to reduce noise and sharpen edges
+                blurred_img = cv.GaussianBlur(enhanced, (21, 21), 10)
+                high_pass_filtered_img = image - blurred_img
+                high_pass_filtered_img += 128
+
+                tempItem = Item(high_pass_filtered_img, Itemtype(typeOfItem))
+                dataset.append(tempItem)
+    return dataset
+
+def main():
+    #Put Images into dataset with labels
+    dataset:list[Item] = DataPipelineAndEnhancement()
+
+    #Segmentation using Canny Edge Detector
+    image = dataset[5].image
+    image2 = dataset[6].image
+    edges = cv.Canny(image, 100, 200)
+    dilatedEdges = cv.dilate(edges, np.ones((9, 9), np.uint8), iterations=1)
+    openEdges = cv.erode(dilatedEdges, np.ones((9, 9), np.uint8), iterations=1)
+    cv.imshow('edges', openEdges)
+    cv.waitKey(0)
+
+    #Finding components using contours
+    contours, hierarchy = cv.findContours(openEdges, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    edgeContours = cv.drawContours(image, contours, -1, (0, 255, 0), 3)
+    cv.imshow('contours',edgeContours)
+    cv.waitKey(0)
+main()
+
