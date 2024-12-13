@@ -1,30 +1,43 @@
-// image enhancement 
+// image enhancement and segmentation
 import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
 
-#histogram equalization
+#histogram equalization #this function will insert the photos we have(will be included) basically I use the function plt.hist(which will create a histogram and create a 2d array
+#it will then turn that 2d array into a flattened array that is contigious, after it will print the image as a histogram model
 img = cv.imread('rose.webp', cv.IMREAD_GRAYSCALE)
 assert img is not None, "file could not be read, check with os.path.exists()"
 plt.hist(img.ravel(), 256, [0, 256]);
 plt.show()
 
-//smoothing
+//smoothing 
+#this function reads and img and creates a kernel and np.ones which will return an array of the img, and fill it with ones(white)
+# we then used the function cv.filter2d, which will filter the image.
+#we also have a function that can blur the image as well and 
+import numpy as np
+import cv2 as cv
+from matplotlib import pyplot as plt
+
 img = cv.imread('opencv.png')
 assert img is not None, "file could not be read, check with os.path.exists()"
 
 kernel = np.ones((5, 5), np.float32) / 25
 dst = cv.filter2D(img, -1, kernel)
-
 blur = cv.blur(img,(5,5))
+gblur = cv.GaussianBlur(img,(5,5),0)
 
-plt.subplot(121), plt.imshow(img), plt.title('Original')
-plt.xticks([]), plt.yticks([])
-plt.subplot(122), plt.imshow(dst), plt.title('Averaging')
-plt.xticks([]), plt.yticks([])
-plt.show()
+
+cv.imshow("Original Image", img)
+cv.imshow("dst", dst)
+cv.imshow("Blur image", blur)
+cv.imshow("gaussian blur", gblur)
+
+cv.waitKey(0)
+cv.destroyAllWindows()
 
 //contours with area
+#this function will display the photo first, then after it is done will calculate what is happening in photo in which if is the white are it will return 2 to the photo but
+#if it calculates the black space, it will return zero
 import numpy as np
 import cv2 as cv
 import sys
@@ -47,10 +60,10 @@ contours, hierarchy = cv.findContours(thresh, 1, 2)
 cnt = contours[0]
 M = cv.contourArea(cnt)
 
-
 print(M)
 
 //2D Histogram
+#
 import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
