@@ -7,37 +7,34 @@ from Dataset import Dataset
 from Items.Items import Item, Itemtype
 ImageDirectory = r'../Images'
 
-def DataPipelineAndEnhancement() -> list[Item]:
-    dataset:list[Item] = []
-    for path, folders, files in os.walk(ImageDirectory):
-        for folderName in folders:
-            folderPath = os.path.join(path, folderName)
-            typeOfItem = str(folderName).removeprefix('CV ').upper()
-            for file in os.listdir(folderPath):
-                #Remove shadows from image using thresholding to find shadows and fill in
-                image = cv.imread(os.path.join(folderPath, file))
-                image = cv.resize(image, (640, 480))
-                hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
-                _, _, v = cv.split(hsv)
-                shadow_mask = v<256
-                enhanced = cv.inpaint(image, shadow_mask.astype(np.uint8), 3, cv.INPAINT_TELEA)
+def DataPipelineAndEnhancement() -> list:
+    dataset:list = []
+    for  file in os.listdir(ImageDirectory):
+        # Remove shadows from image using thresholding to find shadows and fill in
+        if file.endswith('.jpg'):
+            image = cv.imread(os.path.join(ImageDirectory, file),)
+            image = cv.resize(image, (640, 480))
+            hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
+            _, _, v = cv.split(hsv)
+            shadow_mask = v < 256
+            enhanced = cv.inpaint(image, shadow_mask.astype(np.uint8), 3, cv.INPAINT_TELEA)
 
-                #Adding a Gaussian High-Pass Filter to reduce noise and sharpen edges
-                blurred_img = cv.GaussianBlur(enhanced, (21, 21), 10)
-                high_pass_filtered_img = image - blurred_img
-                high_pass_filtered_img += 128
+            # Adding a Gaussian High-Pass Filter to reduce noise and sharpen edges
+            Gray = cv.cvtColor(enhanced, cv.COLOR_BGR2GRAY)
 
-                tempItem = Item(high_pass_filtered_img, Itemtype(typeOfItem))
-                dataset.append(tempItem)
+            dataset.append(Gray)
+
     return dataset
 
 def main():
     #Put Images into dataset with labels
-    dataset:list[Item] = DataPipelineAndEnhancement()
+    dataset:list = DataPipelineAndEnhancement()
 
     #Segmentation using Canny Edge Detector
-    image = dataset[5].image
-    image2 = dataset[6].image
+    image = dataset[9]
+    image2 = dataset[6]
+    cv.imshow('og', image)
+    cv.waitKey(0)
     edges = cv.Canny(image, 100, 200)
     dilatedEdges = cv.dilate(edges, np.ones((9, 9), np.uint8), iterations=1)
     openEdges = cv.erode(dilatedEdges, np.ones((9, 9), np.uint8), iterations=1)
