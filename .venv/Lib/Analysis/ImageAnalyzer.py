@@ -4,7 +4,7 @@ import math
 import cv2 as cv
 import numpy as np
 from Dataset import Dataset
-from Items.Items import Item, Itemtype
+from Records.Items import Item, Itemtype
 ImageDirectory = r'../Images'
 
 def DataPipelineAndEnhancement() -> list:

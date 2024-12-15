@@ -1,0 +1,10 @@
+path: C:\Users\winig\OneDrive - University of Pittsburgh\Documents\Computer Vision\CVProject\.venv\Lib  # dataset root dir
+train: images/train  # train images (relative to 'path')
+val: images/test  # val images (relative to 'path')
+
+# Classes
+names:
+  0: Spoon
+  1: Fork
+  2: Knife
+  3: Chopstick

@@ -44,7 +44,7 @@ def iterate_dir(source, dest, ratio, copy_xml):
         copyfile(os.path.join(source, filename),
                  os.path.join(test_dir, filename))
         if copy_xml:
-            xml_filename = os.path.splitext(filename)[0]+'.xml'
+            xml_filename = os.path.splitext(filename)[0]+'.txt'
             copyfile(os.path.join(source, xml_filename),
                      os.path.join(test_dir,xml_filename))
         images.remove(images[idx])
@@ -53,7 +53,7 @@ def iterate_dir(source, dest, ratio, copy_xml):
         copyfile(os.path.join(source, filename),
                  os.path.join(train_dir, filename))
         if copy_xml:
-            xml_filename = os.path.splitext(filename)[0]+'.xml'
+            xml_filename = os.path.splitext(filename)[0]+'.txt'
             copyfile(os.path.join(source, xml_filename),
                      os.path.join(train_dir, xml_filename))
 
