@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>img18.jpg</filename>
+	<path>C:\Users\winig\OneDrive - University of Pittsburgh\Documents\Computer Vision\CVProject\.venv\Lib\images\img18.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1474</width>
+		<height>1915</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Fork</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>133</xmin>
+			<ymin>447</ymin>
+			<xmax>1396</xmax>
+			<ymax>1687</ymax>
+		</bndbox>
+	</object>
+</annotation>

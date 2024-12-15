@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>img528.jpg</filename>
+	<path>C:\Users\winig\OneDrive - University of Pittsburgh\Documents\Computer Vision\CVProject\.venv\Lib\images\img528.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1907</width>
+		<height>1465</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Chopstick</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>213</xmin>
+			<ymin>103</ymin>
+			<xmax>1667</xmax>
+			<ymax>1244</ymax>
+		</bndbox>
+	</object>
+</annotation>

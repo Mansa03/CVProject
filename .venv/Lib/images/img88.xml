@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>img88.jpg</filename>
+	<path>C:\Users\winig\OneDrive - University of Pittsburgh\Documents\Computer Vision\CVProject\.venv\Lib\images\img88.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1476</width>
+		<height>1917</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Spoon</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>302</xmin>
+			<ymin>390</ymin>
+			<xmax>1163</xmax>
+			<ymax>1508</ymax>
+		</bndbox>
+	</object>
+</annotation>

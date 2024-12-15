@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>img368.jpg</filename>
+	<path>C:\Users\winig\OneDrive - University of Pittsburgh\Documents\Computer Vision\CVProject\.venv\Lib\images\img368.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1906</width>
+		<height>1465</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Spoon</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>763</xmin>
+			<ymin>5</ymin>
+			<xmax>1132</xmax>
+			<ymax>1452</ymax>
+		</bndbox>
+	</object>
+</annotation>

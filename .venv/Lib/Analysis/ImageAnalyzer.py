@@ -29,7 +29,6 @@ def DataPipelineAndEnhancement() -> list:
 def main():
     #Put Images into dataset with labels
     dataset:list = DataPipelineAndEnhancement()
-
     #Segmentation using Canny Edge Detector
     image = dataset[9]
     image2 = dataset[6]
